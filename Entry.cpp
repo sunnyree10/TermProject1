@@ -2,14 +2,20 @@
 #include <fstream>
 #include <string>
 #include "Entry.h"
+
 using namespace std;
 
-Entry::Entry(string name, string number,  string email)
+Entry::Entry(string name, string number, string email)
 {
 	_name = name;
 	_number = number;
 	_email = email;
 }
+
+Entry::~Entry()
+{
+}
+
 void Entry::ShowEntryInfo()
 {
 	cout << "이름: " << _name << endl;
@@ -17,6 +23,3 @@ void Entry::ShowEntryInfo()
 	cout << "이메일: " << _email << endl;
 }
 
-Entry::~Entry()
-{
-}
