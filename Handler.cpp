@@ -7,36 +7,36 @@
 #include "Handler.h"
 #define MAX_NUM 100
 
-
 Handler::Handler(int num)
 	:personNum(num)
 {}
-
 void Handler::Display()
 {
-	for (std::vector<Entry>::iterator it = p1.begin(); it != p1.end(); ++it)
+	for (std::vector<Entry>::iterator it = v1.begin(); it != v1.end(); ++it)
 		(*it).ShowEntryInfo();
 }
-
 void Handler::AddPerson()
 {
 	file.open("a.txt", std::ios::in);
-	std::string *a[MAX_NUM];
-	for (int i = 0; !file.eof(); i++){
-		a[i] = read(file);
-		Entry person(a[i][0], a[i][1], a[i][2]);
-		p1.push_back(person);
+	while(!file.eof()){
+		std::string *a = NULL;
+		a = read(file);
+		Entry person(a[0], a[1], a[2]);
+		v1.push_back(person);
 		//person.ShowEntryInfo();
-		//personNum++;
+		personNum++;
+		delete[]a;
 	}
-	delete[]a;
 	file.close();
-}
-void Handler::Sort()
-{
-	std::sort(p1.begin(), p1.end());
-}
 
+}
+/*void Handler::Sort()
+{
+	std::sort(v1.begin(), v1.end());
+}*/
+Handler::~Handler()
+{
+}
 
 
 std::string* read(std::ifstream &file)
