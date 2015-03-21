@@ -1,10 +1,8 @@
 #include <iostream>
 #include <string>
-#include "Entry.h"
 #include "Handler.h"
 
 using namespace std;
-
 
 int main()
 {

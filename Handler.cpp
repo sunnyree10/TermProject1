@@ -3,54 +3,54 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include "Entry.h"
+
 #include "Handler.h"
-#define MAX_NUM 100
 
 using namespace std;
+
+// 연락처 정보를 저장
+Entry::Entry(string name, string number, string email) {
+	_name = name;
+	_number = number;
+	_email = email;
+}
+
 
 Handler::Handler(int num)
 :personNum(num)
 {}
 
-void Handler::Display()
-{
-	for (map<string, Entry>::iterator it = Entries.begin(); it != Entries.end(); ++it)
-		cout << (*it).first << endl;
+// 연락처 정보를 출력하는 함수
+void Handler::Display() {
+	cout << "이름\t" << "전화번호\t" << "이메일" << endl;
+	for (map<string, Entry>::iterator itEntries = Entries.begin(); itEntries != Entries.end(); ++itEntries) {
+		cout << (*itEntries).second.EntryName() << "\t"
+			 << (*itEntries).second.EntryNumber() << "\t"
+			 << (*itEntries).second.EntryEmail() << endl;
+	}
 }
-void Handler::AddPerson()
-{
+
+// 
+void Handler::AddPerson() {
 	file.open("input.txt",ios::in);
 	while(!file.eof()){
 		string *a = NULL;
 		a = read(file);
 		Entry person(a[0], a[1], a[2]);
 		Entries.insert(std::pair<string, Entry>(a[0], person));
-		person.ShowEntryInfo();
 		personNum++;
 		delete[]a;
 	}
 	file.close();
 
 }
-/*void Handler::Sort()
-{
-	std::sort(v1.begin(), v1.end());
-}*/
-Handler::~Handler()
-{
-}
 
-
-string* read(std::ifstream &file)
-{
-
+string* read(std::ifstream &file) {
 	string  *arr = NULL;
-	if (file.is_open() == false)
-	{
+	if (file.is_open() == false) {
 		std::cout << "현재 정보가 없습니다. " << std::endl;
 	}
-	else{
+	else {
 			string word;
 			getline(file, word);;
 			string delimiter = " ";
@@ -69,10 +69,9 @@ string* read(std::ifstream &file)
 	return arr;
 }
 
+// 연락처 정보를 파일로 내보내는 함수
 void WriteOutEntries(string fileName, Handler *myHandler) {
 	ofstream outFile(fileName.data());
-	
-	
 	for (map<string, Entry>::iterator it = myHandler->Entries.begin();
 		it != myHandler->Entries.end(); ++it) {
 		outFile << (*it).second.EntryName() << ' '
