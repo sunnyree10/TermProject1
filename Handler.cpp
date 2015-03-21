@@ -15,8 +15,8 @@ Handler::Handler(int num)
 
 void Handler::Display()
 {
-	for (vector<Entry>::iterator it = v1.begin(); it != v1.end(); ++it)
-		(*it).ShowEntryInfo();
+	for (map<string, Entry>::iterator it = Entries.begin(); it != Entries.end(); ++it)
+		cout << (*it).first << endl;
 }
 void Handler::AddPerson()
 {
@@ -26,7 +26,7 @@ void Handler::AddPerson()
 		a = read(file);
 		Entry person(a[0], a[1], a[2]);
 		Entries.insert(std::pair<string, Entry>(a[0], person));
-		//person.ShowEntryInfo();
+		person.ShowEntryInfo();
 		personNum++;
 		delete[]a;
 	}
@@ -70,12 +70,13 @@ string* read(std::ifstream &file)
 }
 
 void WriteOutEntries(string fileName, Handler *myHandler) {
-	ofstream outFile("output.txt");
-	std::cout << "1";
-	for (map<string, Entry>::iterator iEntries = myHandler->EntryData().begin();
-		iEntries != myHandler->EntryData().end(); ++iEntries) {
-		/*outFile << (*iEntries).second.EntryName() << ' '
-				<< (*iEntries).second.EntryNumber() << ' '
-				<< (*iEntries).second.EntryEmail() << endl;*/
+	ofstream outFile(fileName.data());
+	
+	
+	for (map<string, Entry>::iterator it = myHandler->Entries.begin();
+		it != myHandler->Entries.end(); ++it) {
+		outFile << (*it).second.EntryName() << ' '
+				<< (*it).second.EntryNumber() << ' '
+				<< (*it).second.EntryEmail() << endl;
 	}
 }
