@@ -70,11 +70,12 @@ string* read(std::ifstream &file)
 }
 
 void WriteOutEntries(string fileName, Handler *myHandler) {
-	ofstream outFile(fileName.data());
+	ofstream outFile("output.txt");
+	std::cout << "1";
 	for (map<string, Entry>::iterator iEntries = myHandler->EntryData().begin();
 		iEntries != myHandler->EntryData().end(); ++iEntries) {
-		outFile << (*iEntries).second.EntryName() << ' '
+		/*outFile << (*iEntries).second.EntryName() << ' '
 				<< (*iEntries).second.EntryNumber() << ' '
-				<< (*iEntries).second.EntryEmail() << endl;
+				<< (*iEntries).second.EntryEmail() << endl;*/
 	}
 }
