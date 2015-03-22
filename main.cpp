@@ -13,5 +13,6 @@ int main()
 	h1.DisplayEntries();
 	string fileName = "output.txt";
 	WriteOutEntries(fileName, h1);
+	h1.FindEntryWithName();
 	return 0;
 }

@@ -42,7 +42,7 @@ void Handler::GetEntriesFromFile() {
 std::map<std::string, Entry>::iterator Handler::FindEntryWithName() {
 	std::string name;
 	std::cout << "이름으로 검색: ";
-	std::cin >> name;
+	std::getline(std::cin, name);
 	std::map<std::string, Entry>::iterator findEntry = Entries.find(name);
 	if (findEntry != Entries.end()) {
 		std::cout << "이름\t" << "전화번호\t" << "이메일" << std::endl;
