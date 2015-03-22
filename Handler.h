@@ -2,8 +2,8 @@
 #define __HANDLER_H__
 
 #include <fstream>
-#include <map>
 #include <string>
+#include <map>
 
 // 연락처 정보
 class Entry {
@@ -27,11 +27,12 @@ private:
 	std::map<std::string, Entry> Entries;
 
 public:
-	Handler(int num = 0);
+	Handler() { personNum = 0; };
 	~Handler() {};
-	void Display();
-	void AddPerson();
-	std::map<std::string, Entry> ReturnEntries();
+	void DisplayEntries();
+	void GetEntriesFromFile();
+	std::map<std::string, Entry> EntryData() { return Entries; }
+	std::map<std::string, Entry>::iterator FindEntryWithName();
 };
 
 #endif
