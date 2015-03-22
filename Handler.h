@@ -33,6 +33,7 @@ public:
 	void GetEntriesFromFile();
 	std::map<std::string, Entry> EntryData() { return Entries; }
 	std::map<std::string, Entry>::iterator FindEntryWithName();
+	std::map<std::string, Entry>::iterator FindEntryWithNumber();
 };
 
 #endif

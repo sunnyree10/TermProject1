@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <regex>
-
 #include "Handler.h"
 #include "file.h"
 
@@ -13,19 +12,19 @@ Entry::Entry(std::string name, std::string number, std::string email) {
 	_email = email;
 }
 
-
 // 연락처 정보를 출력하는 함수
 void Handler::DisplayEntries() {
 	std::cout << "이름\t" << "전화번호\t" << "이메일" << std::endl;
 	for (std::map<std::string, Entry>::iterator itEntries = Entries.begin(); itEntries != Entries.end(); ++itEntries) {
 		std::cout << itEntries->second.EntryName() << "\t"
-				  << itEntries->second.EntryNumber() << "\t"
-				  << itEntries->second.EntryEmail() << std::endl;
+			<< itEntries->second.EntryNumber() << "\t"
+			<< itEntries->second.EntryEmail() << std::endl;
 	}
 }
 
 // 파일에서 연락처 정보를 가져오는 함수
-void Handler::GetEntriesFromFile() {
+void Handler::GetEntriesFromFile()
+{
 	std::ifstream openFile("input.txt");
 	while (!openFile.eof()){
 		std::string *data = NULL;
@@ -39,7 +38,8 @@ void Handler::GetEntriesFromFile() {
 }
 
 // 이름으로 연락처를 검색하는 함수
-std::map<std::string, Entry>::iterator Handler::FindEntryWithName() {
+std::map<std::string, Entry>::iterator Handler::FindEntryWithName()
+{
 	std::string name;
 	std::cout << "이름으로 검색: ";
 	std::getline(std::cin, name);
@@ -47,12 +47,32 @@ std::map<std::string, Entry>::iterator Handler::FindEntryWithName() {
 	if (findEntry != Entries.end()) {
 		std::cout << "이름\t" << "전화번호\t" << "이메일" << std::endl;
 		std::cout << findEntry->second.EntryName() << "\t"
-				  << findEntry->second.EntryNumber() << "\t"
-				  << findEntry->second.EntryEmail() << std::endl;
+			<< findEntry->second.EntryNumber() << "\t"
+			<< findEntry->second.EntryEmail() << std::endl;
 	}
 	else {
 		std::cout << "검색 결과가 없습니다." << std::endl;
 	}
 
+	return findEntry;
+}
+
+std::map<std::string, Entry>::iterator Handler::FindEntryWithNumber()
+{
+	std::string number;
+	std::cout << "번호로 검색: ";
+	std::getline(std::cin, number);
+	std::map<std::string, Entry>::iterator findEntry;
+	for (findEntry = Entries.begin(); findEntry != Entries.end() && (number.compare(findEntry->second.EntryNumber())); ++findEntry);
+	if (findEntry != Entries.end()){
+		std::cout << "이름\t" << "전화번호\t" << "이메일" << std::endl;
+		std::cout << findEntry->second.EntryName() << "\t"
+			<< findEntry->second.EntryNumber() << "\t"
+			<< findEntry->second.EntryEmail() << std::endl;
+	}
+	else{
+		std::cout << "검색 결과가 없습니다." << std::endl;
+	}
+	
 	return findEntry;
 }
