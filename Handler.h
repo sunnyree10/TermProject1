@@ -29,11 +29,12 @@ private:
 public:
 	Handler() { personNum = 0; };
 	~Handler() {};
+	void AddEntry();
 	void DisplayEntries();
 	void GetEntriesFromFile();
 	std::map<std::string, Entry> EntryData() { return Entries; }
-	std::map<std::string, Entry>::iterator FindEntryWithName();
-	std::map<std::string, Entry>::iterator FindEntryWithNumber();
+	std::map<std::string, Entry>::iterator FindEntry();
+	std::string Handler::GetNameFromNumber(std::string number);
 };
 
 #endif
